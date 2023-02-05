@@ -41,7 +41,7 @@ if($user_kanri == ""){
                     ">
                     ユーザー一覧
                 </a>
-                <a href="./user_kanri/logout.php" 
+                <a href="logout.php" 
                     class="
                         mr-5
                         hover:text-gray-900 hover:cursor-pointer hover:bg-indigo-300

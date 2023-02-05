@@ -62,7 +62,7 @@ if($status == false){
                     ">
                     ユーザー一覧
                 </a>
-                <a href="./user_kanri/logout.php" 
+                <a href="logout.php" 
                     class="
                         mr-5
                         hover:text-gray-900 hover:cursor-pointer hover:bg-indigo-300
@@ -92,7 +92,7 @@ if($status == false){
                             text-base text-gray-700
                             py-1 px-3
                         " 
-                        require
+                        required
                         value="<?=$result["name"]?>"
                     >
 
@@ -109,7 +109,7 @@ if($status == false){
                             text-base text-gray-700
                             py-1 px-3
                         " 
-                        require
+                        required
                         value="<?=$result["lid"]?>"
                     >
 
@@ -126,7 +126,7 @@ if($status == false){
                             text-base text-gray-700
                             py-1 px-3
                         " 
-                        require
+                        required
                         value="<?=$result["lpw"]?>"
                     >
             
@@ -146,7 +146,7 @@ if($status == false){
                                 rounded border border-gray-300
                                 text-base text-gray-700
                             " 
-                            require
+                            required
                             value=0
                             <?php
                                 if($result['kanri_flg'] == 0){
@@ -168,7 +168,7 @@ if($status == false){
                                 text-base text-gray-700
                                 hover:cursor-pointer
                             " 
-                            require
+                            required
                             value=1
                             <?php
                                 if($result['kanri_flg'] == 1){
@@ -194,7 +194,7 @@ if($status == false){
                                 rounded border border-gray-300
                                 text-base text-gray-700
                             " 
-                            require
+                            required
                             value=0
                             <?php
                                 if($result['life_flg'] == 0){
@@ -215,7 +215,7 @@ if($status == false){
                                 text-base text-gray-700
                                 hover:cursor-pointer
                             " 
-                            require
+                            required
                             value=1
                             <?php
                                 if($result['life_flg'] == 1){

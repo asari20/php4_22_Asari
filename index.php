@@ -90,7 +90,7 @@ $user_kanri = kanriCheck();
                             text-base text-gray-700
                             py-1 px-3
                         " 
-                        require
+                        required
                     >
 
                 </div>
@@ -106,7 +106,7 @@ $user_kanri = kanriCheck();
                             text-base text-gray-700
                             py-1 px-3
                         " 
-                        require
+                        required
                     >
             
                 </div>

@@ -80,7 +80,7 @@ if($status == false){
                             text-base text-gray-700
                             py-1 px-3
                         " 
-                        require
+                        required
                         value="<?=$result['name']?>"
                     >
                     
@@ -97,7 +97,7 @@ if($status == false){
                             focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200
                             text-base text-gray-700
                             py-1 px-3"
-                        require
+                        required
                         value="<?=$result['author']?>"
                     >
             

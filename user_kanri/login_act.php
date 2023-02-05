@@ -11,9 +11,9 @@ require_once("../funcs.php");
 $pdo = db_conn();
 
 // 3.SQL用意
-$stmt = $pdo->prepare("SELECT * FROM gs_user_table WHERE lid = :lid AND lpw =:lpw");
+$stmt = $pdo->prepare("SELECT * FROM gs_user_table WHERE lid = :lid");
 $stmt -> bindValue(':lid',$lid, PDO::PARAM_STR);
-$stmt -> bindValue(':lpw',$lpw, PDO::PARAM_STR); //* Hash化する場合はコメントする
+// $stmt -> bindValue(':lpw',$lpw, PDO::PARAM_STR); //* Hash化する場合はコメントする
 $status = $stmt->execute();
 
 // 4.SQL実行時エラーがある場合はSTOP
@@ -25,7 +25,7 @@ if($status == false){
 $val = $stmt->fetch();
 
 //* if(password_verify($lpw, $val["lpw"])){
-if( $val["id"] != ""){
+if(password_verify($lpw, $val["lpw"])){
     // login成功時
     $_SESSION["chk_ssid"]  = session_id();//SESSION変数にIDを保存
     $_SESSION["kanri_flg"] = $val["kanri_flg"];//SESSION変数に管理者権限のflagを保存
