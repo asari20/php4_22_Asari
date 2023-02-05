@@ -11,9 +11,9 @@ $pdo = db_conn();
 
 // 3.SQL文を用意
 $stmt = $pdo->prepare(
- "INSERT INTO gs_bm_table(unique_key,name,author,url,comment,indate)
+  "INSERT INTO gs_bm_table(unique_key,name,author,url,comment,indate)
   VALUES(NULL, :name, :author, :url, :comment, sysdate())
- "
+  "
 );
 
 // 4.バインド変数
@@ -28,8 +28,7 @@ $status = $stmt ->execute();
 // 6.データ登録処理後
 if($status == false){
     //SQL実行時にエラーがある場合（エラーオブジェクト取得して表示）
-  $error = $stmt->errorInfo();
-  exit("ErrorMassage:".$error[2]);
+    sql_error($stmt);
 }else{
   //５．index.phpへリダイレクト
   redirect('index.php');

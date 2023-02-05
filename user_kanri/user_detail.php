@@ -1,10 +1,23 @@
 <?php
-// 1.ID取得
-$id = $_GET['id'];
+// SESSION開始
+session_start();
 
-// 2.DB接続
+// 関数呼び出し
 require_once('../funcs.php');
+
+// ログインチェック
+loginCheck();
+$user_kanri = kanriCheck();
+
+if($user_kanri == ""){
+    redirect("../select.php");
+}
+
+// 1.DB接続
 $pdo = db_conn();
+
+// 2.ID取得
+$id = $_GET['id'];
 
 // 3.データ取得
 $stmt = $pdo->prepare("SELECT *FROM gs_user_table WHERE id =:id");
@@ -49,14 +62,12 @@ if($status == false){
                     ">
                     ユーザー一覧
                 </a>
-                <a href="login.php" 
+                <a href="./user_kanri/logout.php" 
                     class="
                         mr-5
                         hover:text-gray-900 hover:cursor-pointer hover:bg-indigo-300
-                    "
-                    hidden
-                >
-                    ログイン
+                    ">
+                    ログアウト
                 </a>
             </nav>
     </div>

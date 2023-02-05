@@ -17,12 +17,13 @@
             </a>
 
             <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-                <a href="../select.php" 
+                <a href="../index.php" 
                     class="
                         mr-5
                         hover:text-gray-900 hover:cursor-pointer hover:bg-indigo-300
-                    ">
-                    ブックマーク一覧
+                    "
+                    >
+                    ブックマーク登録
                 </a>
                 <a href="login.php" 
                     class="

@@ -1,3 +1,19 @@
+<?php
+// SESSION開始
+session_start();
+
+// 関数呼び出し
+require_once('../funcs.php');
+
+// ログインチェック
+loginCheck();
+$user_kanri = kanriCheck();
+
+if($user_kanri == ""){
+    redirect("../select.php");
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -25,14 +41,12 @@
                     ">
                     ユーザー一覧
                 </a>
-                <a href="login.php" 
+                <a href="./user_kanri/logout.php" 
                     class="
                         mr-5
                         hover:text-gray-900 hover:cursor-pointer hover:bg-indigo-300
-                    "
-                    hidden
-                >
-                    ログイン
+                    ">
+                    ログアウト
                 </a>
             </nav>
     </div>
@@ -57,7 +71,7 @@
                             text-base text-gray-700
                             py-1 px-3
                         " 
-                        require
+                        required
                     >
 
                 </div>
@@ -73,7 +87,7 @@
                             text-base text-gray-700
                             py-1 px-3
                         " 
-                        require
+                        required
                     >
 
                 </div>
@@ -89,7 +103,7 @@
                             text-base text-gray-700
                             py-1 px-3
                         " 
-                        require
+                        required
                     >
             
                 </div>
@@ -108,7 +122,7 @@
                                 rounded border border-gray-300
                                 text-base text-gray-700
                             " 
-                            require
+                            required
                             value=0
                         >：一般
                     </label>
@@ -123,7 +137,7 @@
                                 text-base text-gray-700
                                 hover:cursor-pointer
                             " 
-                            require
+                            required
                             value=1
                         >：管理者
                     </label>
@@ -143,7 +157,7 @@
                                 rounded border border-gray-300
                                 text-base text-gray-700
                             " 
-                            require
+                            required
                             value=0
                         >：無効
                     </label>
@@ -158,7 +172,7 @@
                                 text-base text-gray-700
                                 hover:cursor-pointer
                             " 
-                            require
+                            required
                             value=1
                         >：有効
                     </label>

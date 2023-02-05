@@ -1,13 +1,6 @@
 <?php
-
-// SESSION開始
-session_start();
-
 // 関数呼び出し
 require_once('funcs.php');
-
-// ログインチェック
-loginCheck();
 
 // 1.DB接続
 $pdo = db_conn();
@@ -50,12 +43,19 @@ if($status == false){
             </a>
 
             <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-                <a href="select.php" 
+                <a href="select_nologin.php" 
                     class="
                         mr-5
                         hover:text-gray-900 hover:cursor-pointer hover:bg-indigo-300
                     ">
                     ブックマーク一覧
+                </a>
+                <a href="./user_kanri/login.php" 
+                    class="
+                        mr-5
+                        hover:text-gray-900 hover:cursor-pointer hover:bg-indigo-300
+                    ">
+                    ログイン
                 </a>
             </nav>
     </div>
@@ -66,7 +66,7 @@ if($status == false){
         <div class="flex flex-col text-center w-full mb-5">
             <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-700">ブックマーク</h1>
         </div>
-        <form method="POST" action="update.php"  class="lg:w-1/2 md:w-2/3 mx-auto">
+        <form method="POST" action="select_nologin.php"  class="lg:w-1/2 md:w-2/3 mx-auto">
             <div class="flex flex-wrap -m-2">
                 <div class="p-2 w-full">
                     
@@ -80,7 +80,7 @@ if($status == false){
                             text-base text-gray-700
                             py-1 px-3
                         " 
-                        require
+                        disabled
                         value="<?=$result['name']?>"
                     >
                     
@@ -97,7 +97,7 @@ if($status == false){
                             focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200
                             text-base text-gray-700
                             py-1 px-3"
-                        require
+                        disabled
                         value="<?=$result['author']?>"
                     >
             
@@ -114,6 +114,7 @@ if($status == false){
                         focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200
                         text-base text-gray-700
                         py-1 px-3" 
+                        disabled
                         value="<?=$result['url']?>"
                     >
             
@@ -132,12 +133,13 @@ if($status == false){
                             py-1 px-3
                             resize-none
                         " 
+                        disabled
                     ><?=$result['comment']?></textarea>
                 </div>
             </div>
 
             <input type="hidden" name="key" value="<?=$result['unique_key']?>">
-            <input type="submit" value="送信" 
+            <input type="submit" value="戻る" 
                 class="
                     flex
                     mx-auto mt-5

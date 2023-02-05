@@ -11,11 +11,9 @@ require_once("../funcs.php");
 $pdo = db_conn();
 
 // 3.SQL用意
-$stmt = $pdo->prepare("SELECT * FROM gs_user_table
-    WHERE lid = :lid
-");
-
-$stmt -> bindValue(':lid',$lid,PDO::PARAM_STR);
+$stmt = $pdo->prepare("SELECT * FROM gs_user_table WHERE lid = :lid AND lpw =:lpw");
+$stmt -> bindValue(':lid',$lid, PDO::PARAM_STR);
+$stmt -> bindValue(':lpw',$lpw, PDO::PARAM_STR); //* Hash化する場合はコメントする
 $status = $stmt->execute();
 
 // 4.SQL実行時エラーがある場合はSTOP
@@ -25,19 +23,18 @@ if($status == false){
 
 // 5.取得データを表示
 $val = $stmt->fetch();
-var_dump($val);
-$pw = password_hash($lpw,PASSWORD_DEFAULT);
-echo $pw;
-if(password_verify($lpw, $val["lpw"])){
+
+//* if(password_verify($lpw, $val["lpw"])){
+if( $val["id"] != ""){
     // login成功時
     $_SESSION["chk_ssid"]  = session_id();//SESSION変数にIDを保存
     $_SESSION["kanri_flg"] = $val["kanri_flg"];//SESSION変数に管理者権限のflagを保存
     $_SESSION['name']      = $val['name'];//SESSION変数にnameを保存
-
+    redirect('../select.php');
 }else{
-    // redirect("logout.php");
+    redirect("logout.php");
 }
 
-
+exit();
 
 ?>

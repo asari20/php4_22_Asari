@@ -1,13 +1,6 @@
 <?php
-// SESSIONスタート
-session_start();
-
 // 1.関数呼び出し
 require_once('funcs.php');
-
-// 2.ログインチェック&管理者チェック
-loginCheck();
-$user_kanri= kanriCheck();
 
 // 3.DB接続(以下ログイン時のみ)
 $pdo = db_conn();
@@ -31,15 +24,10 @@ while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
 
     $view .= '<div class="m-1 p-1 border border-gray-300 w-1/3 rounded text-center">';
     $view .= '<div class="flex justify-end">';
-    $view .= '<a href="detail.php?unique_key='.$result['unique_key'].'" 
+    $view .= '<a href="detail_nologin.php?unique_key='.$result['unique_key'].'" 
                 class="inline-block mr-1 mb-1"
             >
-                <i class="fa-solid fa-pen"></i>
-            </a>';
-    $view .= '<a href="delete.php?unique_key='.$result['unique_key'].'" 
-                class="inline-block mr-1 mb-1"
-            >
-                <i class="fa-solid fa-trash"></i>
+                <i class="fa-solid fa-circle-info"></i>
             </a>';
     $view .= '</div>';
     $view .= '<div class="text-center mb-1">登録日時：'.$result['indate'].'</div>';
@@ -59,7 +47,6 @@ while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
     $view .= '<div class="text-center my-2">コメント：'.$result['comment'].'</div>';
     $view .= "</div>";
 }
-
 
 }
 
@@ -91,13 +78,12 @@ while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
                     ">
                     ブックマーク登録
                 </a>
-                <?=$user_kanri?>
-                <a href="./user_kanri/logout.php" 
+                <a href="./user_kanri/login.php" 
                     class="
                         mr-5
                         hover:text-gray-900 hover:cursor-pointer hover:bg-indigo-300
                     ">
-                    ログアウト
+                    ログイン
                 </a>
             </nav>
     </div>

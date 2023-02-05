@@ -1,10 +1,20 @@
 <?php
-// 1.対象のID取得
-$key = $_GET['unique_key'];
 
-// 2.DB接続
+
+// SESSION開始
+session_start();
+
+// 関数呼び出し
 require_once('funcs.php');
+
+// ログインチェック
+loginCheck();
+
+// 1.DB接続
 $pdo = db_conn();
+
+// 2.対象のID取得
+$key = $_GET['unique_key'];
 
 // 3.削除SQL
 $stmt = $pdo->prepare("DELETE FROM gs_bm_table WHERE unique_key = :key");

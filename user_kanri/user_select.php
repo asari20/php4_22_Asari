@@ -1,15 +1,28 @@
 <?php
-// 1.DB接続
+// SESSIONスタート
+session_start();
+
+// 1.関数呼び出し
 require_once('../funcs.php');
+
+// 2.ログインチェック&管理者チェック
+loginCheck();
+$user_kanri = kanriCheck();
+
+if($user_kanri == ""){
+    redirect("../select.php");
+}
+
+// 3.DB接続(以下ログイン時のみ)
 $pdo = db_conn();
 
-// 2.SQL用意
+// 4.SQL用意
 $stmt = $pdo ->prepare("SELECT * FROM gs_user_table");
 
-// 3.実行
+// 5.実行
 $status = $stmt->execute();
 
-// 4.データ表示
+// 6.データ表示
 $view = "";
 
 if($status == false){
@@ -71,21 +84,27 @@ while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
             </a>
 
             <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-                <a href="../select.php" 
+                <a href="../index.php" 
                     class="
                         mr-5
                         hover:text-gray-900 hover:cursor-pointer hover:bg-indigo-300
                     ">
                     ブックマーク登録
                 </a>
-                <a href="./user_select.php" 
+                <a href="../select.php"  
                     class="
                         mr-5
                         hover:text-gray-900 hover:cursor-pointer hover:bg-indigo-300
                     "
-                    hidden
                     >
-                    ユーザー管理
+                    ブックマーク一覧
+                </a>
+                <a href="./user_kanri/logout.php" 
+                    class="
+                        mr-5
+                        hover:text-gray-900 hover:cursor-pointer hover:bg-indigo-300
+                    ">
+                    ログアウト
                 </a>
             </nav>
     </div>

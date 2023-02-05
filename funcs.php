@@ -46,6 +46,20 @@ function loginCheck(){
   }
 }
 
-
+function kanriCheck(){
+  if($_SESSION["kanri_flg"] == 1){
+    return $user_kanri ='
+        <a href="./user_kanri/user_select.php" 
+        class="
+            mr-5
+            hover:text-gray-900 hover:cursor-pointer hover:bg-indigo-300
+        ">
+        ユーザー管理
+        </a>
+    ';
+  }else{
+    return $user_kanri ="";
+  }
+}
 
 ?>

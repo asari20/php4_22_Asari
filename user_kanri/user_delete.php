@@ -1,10 +1,23 @@
 <?php
-// 1.対象のID取得
-$id = $_GET['id'];
+// SESSION開始
+session_start();
 
-// 2.DB接続
+// 関数呼び出し
 require_once('../funcs.php');
+
+// ログインチェック
+loginCheck();
+$user_kanri = kanriCheck();
+
+if($user_kanri == ""){
+    redirect("../select.php");
+}
+
+// 1.DB接続
 $pdo = db_conn();
+
+// 2.対象のID取得
+$id = $_GET['id'];
 
 // 3.削除SQL
 $stmt = $pdo->prepare("DELETE FROM gs_user_table WHERE id = :id");

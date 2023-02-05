@@ -1,3 +1,43 @@
+<?php
+session_start();
+require_once("funcs.php");
+
+if(!isset($_SESSION["chk_ssid"]) || $_SESSION["chk_ssid"] != session_id()){
+
+    $bm_move = "select_nologin.php";
+    $log_inout = '
+        <a href="./user_kanri/login.php" 
+        class="
+        mr-5
+        hover:text-gray-900 hover:cursor-pointer hover:bg-indigo-300
+        ">
+        ログイン
+        </a>
+    ';
+}else{
+
+    session_regenerate_id(true);
+    $_SESSION["chk_ssid"] = session_id();
+
+    $bm_move = "select.php";
+    $log_inout = '
+        <a href="./user_kanri/logout.php" 
+        class="
+        mr-5
+        hover:text-gray-900 hover:cursor-pointer hover:bg-indigo-300
+        ">
+        ログアウト
+        </a>
+    ';
+}
+
+// 管理者チェック⇒管理メニュー表示
+$user_kanri = kanriCheck();
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -17,20 +57,16 @@
             </a>
 
             <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-                <a href="select.php" 
+                <a href="<?=$bm_move?>" 
                     class="
                         mr-5
                         hover:text-gray-900 hover:cursor-pointer hover:bg-indigo-300
-                    ">
+                    "
+                    >
                     ブックマーク一覧
                 </a>
-                <a href="./user_kanri/login.php" 
-                    class="
-                        mr-5
-                        hover:text-gray-900 hover:cursor-pointer hover:bg-indigo-300
-                    ">
-                    ログイン
-                </a>
+                <?=$user_kanri?>
+                <?= $log_inout ?>
             </nav>
     </div>
 </header>
